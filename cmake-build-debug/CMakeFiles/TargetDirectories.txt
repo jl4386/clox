@@ -1,3 +1,3 @@
-/Users/alex/CLionProjects/clox/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/alex/CLionProjects/clox/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/alex/CLionProjects/clox/cmake-build-debug/CMakeFiles/clox.dir
+/Users/alex/CLionProjects/clox/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/alex/CLionProjects/clox/cmake-build-debug/CMakeFiles/rebuild_cache.dir

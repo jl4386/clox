@@ -95,8 +95,11 @@ static InterpretResult run() {
 #endif
     uint8_t instruction;
     switch (instruction = READ_BYTE()) {
-      case OP_RETURN:printValue(pop());
+      case OP_PRINT: printValue(pop());
         printf("\n");
+        break;
+      case OP_RETURN:
+        // Exit interpreter
         return INTERPRET_OK;
       case OP_ADD: {
         if (IS_STRING(peek(0)) && IS_STRING(peek(1))) {

@@ -456,9 +456,14 @@ static void ifStatement() {
   consume(TOKEN_LEFT_PAREN, "Expect '(' after 'if'.");
   expression();
   consume(TOKEN_RIGHT_PAREN, "Expect ')' after condition.");
-  int thenJump = emitJump(OP_JUMP_IF_ELSE);
+  int thenJump = emitJump(OP_JUMP_IF_FALSE);
+  emitByte(OP_POP);
   statement();
+  int elseJump = emitJump(OP_JUMP);
   patchJump(thenJump);
+  emitByte(OP_POP);
+  if (match(TOKEN_ELSE)) statement();
+  patchJump(elseJump);
 }
 
 static void printStatement() {
@@ -491,10 +496,6 @@ static void synchronize() {
 static void declaration() {
   if (match(TOKEN_VAR)) {
     varDeclaration();
-  } else if (match(TOKEN_LEFT_BRACE)) {
-    beginScope();
-    block();
-    endScope();
   } else {
     statement();
   }
@@ -504,6 +505,10 @@ static void declaration() {
 static void statement() {
   if (match(TOKEN_PRINT)) {
     printStatement();
+  } else if (match(TOKEN_LEFT_BRACE)) {
+    beginScope();
+    block();
+    endScope();
   } else if (match(TOKEN_IF)) {
     ifStatement();
   } else {
